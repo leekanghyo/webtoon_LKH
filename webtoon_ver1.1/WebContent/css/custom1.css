@@ -1,0 +1,168 @@
+.main-top-header {
+	height: 65px;
+	background-color: #0A0A2A;
+	text-align: center;
+	position: fixed;
+	width:100%;
+}
+
+.main-top-head-border {
+	width: 1000px;
+	height: 60px;
+	margin: auto;
+	text-align: right;
+}
+
+.main-border {
+	width: 1000px;
+	height: 40px;
+	margin: auto;
+	background-color: #0A0A2A;
+}
+
+.main-top-logo {
+	font: bold;
+	font-size: xx-large;
+	color: white;
+}
+
+.main-top-button {
+	margin-top: 10px;
+	margin-right: 20px;
+}
+
+.content-grid {
+	width: 1000px;
+	/* height: 100%; */
+	margin: auto;
+	margin-top: 100px;
+	padding: 20px;
+	padding-top: 5px;
+	background-color: white;
+}
+
+.toon-grid {
+	width: 1000px;
+	/* height: 100%; */
+	align:center;
+
+	margin: auto;
+	margin-top: 100px;
+	padding: 0px;
+	padding-top: 5px;
+	background-color: white;
+}
+.toon-img{
+	width: 700px;
+	margin: auto;
+	margin-top 0;
+}
+
+div.well-sm{
+	/* padding-top : 85px; */
+	margin-top:-38px ;
+
+	margin-bottom: 0;
+	position: fixed;
+	width:100%;
+	z-index: 1;
+}
+
+.content-grid-inlist {
+	width: 1000px;
+	margin: auto;
+	background-color: white;
+	
+}
+.input-text{
+	max-width: 15;
+	
+}
+body{
+		background: url('../img/bg.jpg') no-repeat center center fixed;
+	  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.user-img{
+	height: 150px;
+	
+}
+
+.main-notice{
+	width: 1000;
+}
+
+.content-Line{
+	height: 50px;
+
+}
+/*썸네일 -----------------------------------------*/
+.thumbnail-frame1{
+	width: 100px;
+	height: 80px;
+	overflow: hidden;
+	
+}
+.thumbnail-img1{
+	
+	width: auto;
+	height: 100%%;
+	/* margin-left: -30px; */
+}
+.thumbnail-frame2{
+	width: 150px;
+	height: 130px;
+	overflow: hidden;
+	border-radius: 5%;
+}
+.thumbnail-img2{
+	
+	width: auto;
+	height: 100%;
+	
+	/* margin-left: -30px; */
+}
+
+
+/* toon week에서 표시할 썸네일 */
+
+.thumbnail-frame-toon{
+	width: 100%;
+	height: 130px;
+	overflow: hidden;
+
+}
+.thumbnail-img-toon{
+	
+	width: auto;
+	height: 100%;
+	
+	/* margin-left: -30px; */
+}
+
+
+
+.webtoon-title-frame{
+	width: 1000px;
+	margin: auto;
+	margin-top: 100px;
+	height:288px;
+	overflow:hidden;
+	border-dadius:5%;
+	
+}
+.webtoon-title-img{
+	width:auto;
+	background-color: white;
+}
+
+
+
+
+
+/*썸네일 -----------------------------------------*/
+th{
+	text-align: center;
+}

@@ -1,0 +1,149 @@
+--웹툰 컨텐츠 DB
+drop table wt_contents CASCADE CONSTRAINTS;
+create table wt_contents(
+    num number primary key,--넘버
+    worknum number not null, -- 작품 번호
+    writerId varchar2(50) not null, --작가아이디
+    writerName varchar2(50) not null, -- 작가 이름
+    workname varchar2(50) not null, --작품명
+    episode number not null, --작품 화수
+    subtitle varchar2(90), --작품 타이틀 (소제목)
+    descript varchar2(90), --작품 매화 설명
+    writercomment varchar2(900), --작가 코멘트
+    upload_img varchar2(1000), --이미지 정보
+    upload_date date not null, --업로드 날짜 (오늘 기준 1~3일 전에 업로드 되었거나 수정되었으면 갱신 이미지 추가)
+    --소셜 관련
+    wtcreadcount number default 0 not null, --조회수
+    wtcreply number default 0 not null --리플 수
+);
+
+update wt_contents set wtcreply = wtcreply  + 1 where workname= '모여라 시튼 학원!' and episode = 3;
+select * from wt_contents;
+commit;
+-- 웹툰 컨텐츠 시퀀스
+drop sequence wtc_seq;
+create sequence wtc_seq
+    increment by 1
+    start with 1
+    minvalue 1
+    maxvalue 10000000
+    nocache;
+    
+--작가 관련
+select * from wt_writer;
+commit;
+drop table wt_writer CASCADE CONSTRAINTS;
+create table wt_writer(
+    num number primary key, --넘버
+    writerid varchar2(50) not null, --작가 아이디
+    writername varchar2(50) not null,--작가명
+    workname varchar2(1000) not null, --작품명
+    titleimage varchar2(1000), --작품 타이틀 이미지
+    synop varchar2(1000), --작품 시놉시스
+    genre varchar2(1000), --작품 장르
+    writestart date not null, --첫 연재일
+    writeweek number not null, -- 연재 요일 일월화수목금토일 : 0123456
+    writeend number, -- 연재 종료 여부 0: no 1: yes
+    viewmode number,-- 작품 공개 여부 0: 공개 1: 비공개
+    liked number default 0 not null --추천수
+);
+
+drop sequence wtw_seq;
+create sequence wtw_seq
+    increment by 1
+    start with 1
+    minvalue 1
+    maxvalue 10000000
+    nocache;
+
+drop table wt_member CASCADE CONSTRAINTS;
+create table wt_member(
+    num number primary key, --회원 번호
+    id varchar2(15) not null, --아이디
+    name varchar2(50),--작가명
+    passwd varchar2(15) not null, -- 패스워드
+    userimg varchar2(1000), --회원 이미지 (작가 전용)
+    adddate date not null, --가입일
+    wtmtype varchar2(10) not null --회원 타입(관리자, 작가, 일반 회원)
+);
+drop sequence wtm_seq;
+create sequence wtm_seq
+    increment by 1
+    start with 1
+    minvalue 1
+    maxvalue 10000000
+    nocache;
+
+--어드민 추가
+select * from wt_member;
+insert into wt_member values(wtm_seq.nextval,'admin','admin','qwe12','admin.jpg',sysdate,'admin');
+commit;
+--작품들 이미지 정보
+--select * from wt_img;
+--drop table wt_img CASCADE CONSTRAINTS;
+--create table wt_conimg(
+--    num number primary key,
+--    id varchar2(50) not null, --작가명 + 작품명 + 작품 화수
+--    wtimg varchar2(1000)not null
+--);
+
+
+--drop sequence wtimg_seq;
+--create sequence wtimg_seq
+--    increment by 1
+--    start with 1
+--    minvalue 1
+--    maxvalue 10000000
+--    nocache;
+
+--게시판용 테이블
+select * from wt_list;
+drop table wt_list CASCADE CONSTRAINTS;
+create table wt_list(
+    num number primary key, --고유 넘버
+    listtype varchar2(20), --글 타입. 공지일 경우 main, boreder/ 일반 게시글일 경우  normal / 각 웹툰 덧글일 경우 / toon
+    whatcontents varchar2(50), --공지일 경우 null / 일반 글일 경우 작성 장소(각 웹툰 화수 및 일반 게시판) 각 웹툰 화수의 경우, 웹툰 명 + 홧수 조합으로 색인
+    img varchar2(1000),
+    writerid varchar2(50), --작성자 아이디 //작성자가 일치하거나 어드민인 경우에 게시글 삭제 가능
+    writername varchar2(50) not null,--작가명
+    subject varchar2(1000)not null, --제목 글 내용 공지, 일반 게시판 일 경우 입력
+	content varchar2(1500) not null,
+    reg_date date not null, --날짜
+	readcount int default 0, --조회수
+	ref number not null, -- 그룹
+	re_step number not null, -- 정렬
+	re_level number not null, -- 덧글 단계
+    liked number default 0, -- 추천
+    temp varchar2(1) --식별값 (일시적 사용)
+
+);
+
+--추천 체크용
+drop table wtc_like CASCADE CONSTRAINTS;
+create table wtc_like(
+	id varchar2(15) not null, --아이디
+	whatcontents varchar2(50)
+);
+
+drop sequence wtlist_seq;
+create sequence wtlist_seq
+    increment by 1
+    start with 1
+    minvalue 1
+    maxvalue 10000000
+    nocache;
+
+--게시판 리스트
+drop table wt_board_list cascade constraints;
+create table wt_board_list(
+    num number primary key,
+    boardname varchar2(100)
+);
+drop sequence wt_board_list_seq;
+create sequence wt_board_list_seq
+    increment by 1
+    start with 1
+    minvalue 1
+    maxvalue 10000000
+    nocache;
+commit;
